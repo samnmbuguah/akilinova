@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Akilinova - AI-Powered Surveillance & Solutions
+
+A modern, responsive website for Akilinova, showcasing AI-powered surveillance solutions and chatbot services. Built with Next.js, TypeScript, and Tailwind CSS.
+
+## Features
+
+- 🎨 Modern and responsive design
+- ⚡ Fast and optimized performance
+- 🔄 Smooth animations and transitions
+- 📱 Mobile-first approach
+- 🎯 SEO optimized
+- 🌐 Cross-browser compatibility
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Framer Motion](https://www.framer.com/motion/) - Animations
+- [React Icons](https://react-icons.github.io/react-icons/) - Icons
+- [AOS](https://michalsnik.github.io/aos/) - Scroll animations
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/akilinova.git
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. Install dependencies:
+   ```bash
+   cd akilinova
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+akilinova/
+├── public/          # Static assets
+│   └── ...
+├── src/
+│   ├── app/         # App routes
+│   ├── components/  # React components
+│   └── styles/      # Global styles
+├── scripts/         # Utility scripts
+└── ...config files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `Navbar` - Responsive navigation bar
+- `Hero` - Main landing section
+- `Features` - Product features showcase
+- `Testimonials` - Client testimonials
+- `Contact` - Contact form
+- `Footer` - Site footer
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Customization
 
-## Learn More
+### Colors
 
-To learn more about Next.js, take a look at the following resources:
+The main color scheme can be customized in `tailwind.config.ts`. The current theme uses a gradient from blue to purple.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Update the content in the respective component files:
+- Update testimonials in `src/components/Testimonials.tsx`
+- Modify features in `src/components/Features.tsx`
+- Change contact information in `src/components/Contact.tsx`
 
-## Deploy on Vercel
+### Images
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Replace the placeholder images in the `public` directory with your own:
+- `surveillance-dashboard.jpg` - Hero section image
+- `testimonial1.jpg`, `testimonial2.jpg`, `testimonial3.jpg` - Testimonial profile pictures
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+The site can be deployed to any platform that supports Next.js applications. We recommend using [Vercel](https://vercel.com) for the best experience.
+
+```bash
+npm run build
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- Website: [akilinova.com](https://akilinova.com)
+- Email: contact@akilinova.com
+
+## Acknowledgments
+
+- Images from [Unsplash](https://unsplash.com)
+- Icons from [Heroicons](https://heroicons.com)
