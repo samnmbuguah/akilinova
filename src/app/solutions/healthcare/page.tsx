@@ -1,6 +1,5 @@
 'use client';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { CameraIcon, ShieldCheckIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
@@ -146,7 +145,7 @@ export default function HealthcareSolutions() {
                 </h2>
                 <p className="text-white/90 mb-8">
                   Get in touch with our healthcare solutions experts to discuss your specific needs
-                  and discover how we can help enhance your facility's security.
+                  and discover how we can help enhance your facility&apos;s security.
                 </p>
                 <Link
                   href="/demo"
