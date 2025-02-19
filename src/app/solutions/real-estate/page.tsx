@@ -1,6 +1,5 @@
 'use client';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { CameraIcon, ShieldCheckIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
