@@ -140,7 +140,7 @@ export default function CaseStudies() {
                   <div className="mt-8">
                     <Link
                       href="/demo"
-                      className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transition-all duration-200"
+                      className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-red-600 to-red-700 hover:shadow-lg transition-all duration-200"
                     >
                       View Full Case Study
                     </Link>
