@@ -79,7 +79,6 @@ const Navbar = () => {
                     {/* Dropdown Menu */}
                     {showSolutionsDropdown && (
                       <div className="absolute top-full left-0 w-48 py-2 bg-white rounded-lg shadow-xl">
-                        <div className="px-4 py-2 text-sm font-semibold text-gray-500">By Industry</div>
                         {item.subItems?.map((subItem) => (
                           <Link
                             key={subItem.name}
