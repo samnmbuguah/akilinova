@@ -5,10 +5,7 @@ import Link from 'next/link';
 import { 
   CameraIcon, 
   ChartBarIcon, 
-  ShieldCheckIcon,
-  BoltIcon,
   ChatBubbleBottomCenterTextIcon,
-  CogIcon
 } from '@heroicons/react/24/outline';
 
 const solutions = [
