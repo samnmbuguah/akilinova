@@ -45,7 +45,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <h2 className="text-4xl font-bold">
-              <span className="text-gray-900">Let's Talk About Your</span>{' '}
+              <span className="text-gray-900">Let&apos;s Talk About Your</span>{' '}
               <span className="bg-gradient-to-r from-red-600 to-red-700 text-white px-2 py-1 rounded">
                 Security Needs
               </span>
@@ -128,7 +128,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                 />
               </div>
               <div>
@@ -145,7 +145,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                 />
               </div>
               <div>
@@ -161,7 +161,7 @@ const Contact = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                 />
               </div>
               <div>
@@ -178,12 +178,12 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-200"
+                className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-200"
               >
                 Send Message
               </button>
