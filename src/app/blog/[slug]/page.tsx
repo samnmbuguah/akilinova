@@ -3,6 +3,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Metadata } from 'next';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 interface BlogPost {
   slug: string;
@@ -20,9 +21,23 @@ interface Props {
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost> {
-  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, { cache: 'no-store' });
-  if (!res.ok) throw new Error('Failed to fetch blog post');
-  return res.json();
+  try {
+    const res = await fetch(`/api/blog/${slug}`, { 
+      cache: 'no-store',
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    if (!res.ok) {
+      throw new Error(`Failed to fetch blog post: ${res.statusText}`);
+    }
+    
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching blog post:', error);
+    throw new Error('Failed to load blog post. Please try again later.');
+  }
 }
 
 export async function generateMetadata(
@@ -67,11 +82,13 @@ export default async function BlogPost({ params }: Props) {
           </div>
           
           {post.coverImage && (
-            <div className="mb-8">
-              <img
+            <div className="mb-8 relative h-[400px]">
+              <Image
                 src={post.coverImage}
                 alt={post.title}
-                className="w-full h-[400px] object-cover rounded-lg"
+                fill
+                className="object-cover rounded-lg"
+                sizes="(max-width: 768px) 100vw, 800px"
               />
             </div>
           )}
