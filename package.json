@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "NODE_OPTIONS='--max_old_space_size=460' next build",
+    "start": "node server.js",
+    "lint": "next lint",
+    "build:prod": "npm run build && tar -czf production.tar.gz .next package.json package-lock.json public next.config.ts postcss.config.mjs tailwind.config.ts server.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/aos": "^3.0.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
