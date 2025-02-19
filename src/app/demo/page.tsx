@@ -196,7 +196,7 @@ export default function Demo() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-200"
+                className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-200"
               >
                 Request Demo
               </button>
