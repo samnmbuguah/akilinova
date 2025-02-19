@@ -1,5 +1,3 @@
-import { NextResponse } from 'next/server';
-
 const posts = [
   {
     slug: 'getting-started-with-ai-surveillance',
@@ -298,8 +296,6 @@ The future of security is rapidly evolving, driven by technological advances and
   }
 ];
 
-export async function GET(request: Request) {
-  // Return only the necessary fields for the blog list
-  const blogPosts = posts.map(({ content, ...post }) => post);
-  return NextResponse.json(blogPosts);
+export async function GET() {
+  return Response.json(posts);
 } 
