@@ -34,7 +34,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
@@ -44,11 +44,8 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
             className="space-y-8"
           >
-            <h2 className="text-4xl font-bold">
-              <span className="text-gray-900">Let&apos;s Talk About Your</span>{' '}
-              <span className="bg-gradient-to-r from-red-600 to-red-700 text-white px-2 py-1 rounded">
-                Security Needs
-              </span>
+            <h2 className="text-4xl font-bold text-gray-900">
+              Let&apos;s Talk About Your Security Needs
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl">
               Get in touch with us to learn how our AI-powered solutions can
@@ -111,7 +108,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl p-8 shadow-lg"
+            className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
