@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "NODE_OPTIONS='--max_old_space_size=460' next build",
+    "build": "next build",
     "start": "node server.js",
     "lint": "next lint",
     "build:prod": "npm run build && tar -czf production.tar.gz .next package.json package-lock.json public next.config.ts postcss.config.mjs tailwind.config.ts server.js"
