@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { trackNewsletterSubscription, trackSocialMediaClick } from '@/utils/analytics';
 
 const socialLinks = [
   {
@@ -52,6 +53,16 @@ const socialLinks = [
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    trackNewsletterSubscription();
+    // Add your newsletter subscription logic here
+  };
+
+  const handleSocialClick = (platform: string) => {
+    trackSocialMediaClick(platform);
+  };
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -73,6 +84,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors duration-200"
                   aria-label={link.name}
+                  onClick={() => handleSocialClick(link.name)}
                 >
                   {link.icon}
                 </a>
@@ -112,11 +124,10 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
             <ul className="space-y-2">
               <li className="flex items-center text-gray-400">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                <svg className="w-11 h-11 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
-                State House Road Junction, Luther Plaza, 4th Floor, Room 7, Nairobi, Kenya
+                Uhuru Highway, Luther Plaza (East Wing), 4th Floor, Room 7, Next to Central Park, Nairobi, Kenya
               </li>
               <li className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                 <a href="mailto:info@akilinova.com" className="flex items-center">
@@ -141,7 +152,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
             <p className="text-gray-400 mb-4">Stay updated with our latest news and updates.</p>
-            <form className="space-y-2">
+            <form className="space-y-2" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
                 placeholder="Enter your email"
