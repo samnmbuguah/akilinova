@@ -16,23 +16,21 @@ interface BlogPost {
   coverImage: string;
 }
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
-
 async function getBlogPost(slug: string): Promise<BlogPost> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+  
   try {
-    const res = await fetch(`/api/blog/${slug}`, { 
-      cache: 'no-store',
+    const res = await fetch(`${baseUrl}/api/blog/${encodeURIComponent(slug)}`, {
       headers: {
-        'Accept': 'application/json'
-      }
+        'Accept': 'application/json',
+      },
+      cache: 'no-store'
     });
-    
+
     if (!res.ok) {
       throw new Error(`Failed to fetch blog post: ${res.statusText}`);
     }
-    
+
     return res.json();
   } catch (error) {
     console.error('Error fetching blog post:', error);
@@ -40,11 +38,16 @@ async function getBlogPost(slug: string): Promise<BlogPost> {
   }
 }
 
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(params.slug);
   
   return {
     title: post.title,
@@ -52,9 +55,10 @@ export async function generateMetadata(
   };
 }
 
-export default async function BlogPost({ params }: Props) {
-  const { slug } = await params;
-  const post = await getBlogPost(slug);
+export default async function BlogPost({ 
+  params 
+}: Props) {
+  const post = await getBlogPost(params.slug);
 
   return (
     <article className="min-h-screen bg-gray-50">
