@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSolutionsDropdown, setShowSolutionsDropdown] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   const navItems = [
@@ -22,11 +22,15 @@ const Navbar = () => {
         { name: 'Education', href: '/solutions/education' },
         { name: 'Retail', href: '/solutions/retail' },
         { name: 'Real Estate', href: '/solutions/real-estate' },
+        { name: 'Banking & Finance', href: '/solutions/banking-finance' },
       ],
     },
-    { name: 'About', href: '/about' },
-    { name: 'Case Studies', href: '/case-studies' },
     { name: 'Blog', href: '/blog' },
+    { name: 'Company', href: '/about', dropdown: true, subItems: [
+      { name: 'About Us', href: '/about' },
+      { name: 'Team', href: '/team' },
+      { name: 'Careers', href: '/careers' },
+    ]},
   ];
 
   return (
@@ -55,8 +59,8 @@ const Navbar = () => {
                 {item.dropdown ? (
                   <div
                     className="flex items-center cursor-pointer"
-                    onMouseEnter={() => setShowSolutionsDropdown(true)}
-                    onMouseLeave={() => setShowSolutionsDropdown(false)}
+                    onMouseEnter={() => setActiveDropdown(item.name)}
+                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <span className={`text-lg font-semibold transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${
                       pathname.startsWith(item.href) ? 'text-red-600' : ''
@@ -77,7 +81,7 @@ const Navbar = () => {
                       />
                     </svg>
                     {/* Dropdown Menu */}
-                    {showSolutionsDropdown && (
+                    {activeDropdown === item.name && (
                       <div className="absolute top-full left-0 w-48 py-2 bg-white rounded-lg shadow-xl">
                         {item.subItems?.map((subItem) => (
                           <Link
