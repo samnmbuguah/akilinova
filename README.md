@@ -44,8 +44,8 @@ A modern, responsive website for Akilinova, showcasing AI-powered security solut
    ```
 
 4. Run the development server:
-   ```bash
-   npm run dev
+```bash
+npm run dev
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
