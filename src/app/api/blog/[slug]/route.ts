@@ -302,15 +302,32 @@ export async function GET(
   request: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = await context.params;
-  const post = posts.find(p => p.slug === slug);
-  
-  if (!post) {
+  try {
+    const { slug } = await context.params;
+    const post = posts.find(p => p.slug === slug);
+    
+    if (!post) {
+      return NextResponse.json(
+        { error: 'Post not found' },
+        { status: 404 }
+      );
+    }
+
+    // Add CORS headers for production
+    const headers = new Headers();
+    headers.set('Access-Control-Allow-Origin', '*');
+    headers.set('Access-Control-Allow-Methods', 'GET');
+    headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    return NextResponse.json(post, {
+      headers,
+      status: 200
+    });
+  } catch (error) {
+    console.error('Error in blog API route:', error);
     return NextResponse.json(
-      { error: 'Post not found' },
-      { status: 404 }
+      { error: 'Internal server error' },
+      { status: 500 }
     );
   }
-
-  return NextResponse.json(post);
 } 

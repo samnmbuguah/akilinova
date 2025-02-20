@@ -17,14 +17,16 @@ interface BlogPost {
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-  
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? 'https://akilinova.com'
+    : 'http://localhost:3000';
+
   try {
     const res = await fetch(`${baseUrl}/api/blog/${encodeURIComponent(slug)}`, {
       headers: {
         'Accept': 'application/json',
       },
-      cache: 'no-store'
+      next: { revalidate: 3600 }, // Cache for 1 hour
     });
 
     if (!res.ok) {
