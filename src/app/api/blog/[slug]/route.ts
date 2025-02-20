@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const posts = [
   {
@@ -299,15 +299,18 @@ The future of security is rapidly evolving, driven by technological advances and
 ];
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await context.params;
   const post = posts.find(p => p.slug === slug);
   
   if (!post) {
-    return new NextResponse('Post not found', { status: 404 });
+    return NextResponse.json(
+      { error: 'Post not found' },
+      { status: 404 }
+    );
   }
-  
+
   return NextResponse.json(post);
 } 

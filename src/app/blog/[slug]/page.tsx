@@ -39,15 +39,14 @@ async function getBlogPost(slug: string): Promise<BlogPost> {
 }
 
 type Props = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
-  const post = await getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
   
   return {
     title: post.title,
@@ -58,7 +57,8 @@ export async function generateMetadata(
 export default async function BlogPost({ 
   params 
 }: Props) {
-  const post = await getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
 
   return (
     <article className="min-h-screen bg-gray-50">
