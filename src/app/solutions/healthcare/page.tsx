@@ -1,47 +1,85 @@
 'use client';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { CameraIcon, ShieldCheckIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { 
+  VideoCameraIcon,
+  ShieldCheckIcon,
+  UserGroupIcon,
+  ChartBarIcon,
+  HeartIcon
+} from '@heroicons/react/24/outline';
 
-const features = [
+const solutions = [
   {
     title: 'Patient Monitoring',
-    description: 'Advanced AI surveillance for patient safety and behavior monitoring.',
-    icon: CameraIcon,
-    benefits: [
-      'Real-time fall detection',
-      'Patient behavior analysis',
-      'Automated alerts',
-      'Staff response tracking'
+    description: 'Advanced AI-powered monitoring system for healthcare facilities with real-time patient tracking and safety alerts.',
+    icon: VideoCameraIcon,
+    features: [
+      'Real-time monitoring',
+      'Fall detection',
+      'Behavior analysis',
+      'Emergency alerts',
+      'Staff response tracking',
+      'Remote monitoring'
     ]
   },
   {
     title: 'Facility Security',
-    description: 'Comprehensive security solutions for healthcare facilities.',
+    description: 'Comprehensive security solutions to protect healthcare facilities, staff, and patients.',
     icon: ShieldCheckIcon,
-    benefits: [
+    features: [
       'Access control',
-      'Asset tracking',
       'Visitor management',
-      'Emergency response'
+      'Restricted area monitoring',
+      'Asset tracking',
+      'Emergency protocols',
+      'Incident reporting'
+    ]
+  },
+  {
+    title: 'Staff Safety',
+    description: 'Ensure staff safety and optimize workflow with intelligent monitoring solutions.',
+    icon: UserGroupIcon,
+    features: [
+      'Staff tracking',
+      'Panic alerts',
+      'Workflow optimization',
+      'Resource allocation',
+      'Performance analytics',
+      'Safety compliance'
     ]
   },
   {
     title: 'Operations Analytics',
-    description: 'Data-driven insights for healthcare operations optimization.',
+    description: 'Gain insights into facility operations and improve efficiency with advanced analytics.',
     icon: ChartBarIcon,
-    benefits: [
+    features: [
       'Resource utilization',
-      'Staff efficiency',
-      'Compliance monitoring',
-      'Performance metrics'
+      'Patient flow analysis',
+      'Staff efficiency metrics',
+      'Equipment tracking',
+      'Capacity planning',
+      'Performance reporting'
+    ]
+  },
+  {
+    title: 'Patient Care',
+    description: 'Enhance patient care with intelligent monitoring and management systems.',
+    icon: HeartIcon,
+    features: [
+      'Patient activity monitoring',
+      'Care response time',
+      'Treatment tracking',
+      'Recovery analysis',
+      'Care coordination',
+      'Patient safety alerts'
     ]
   }
 ];
 
 export default function HealthcareSolutions() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
@@ -58,34 +96,36 @@ export default function HealthcareSolutions() {
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transform your healthcare facility with AI-powered surveillance and security solutions
-              designed specifically for medical environments.
+              Transform your healthcare facility with our AI-powered surveillance and analytics solutions.
+              Enhance patient care, improve safety, and optimize facility operations.
             </p>
           </motion.div>
         </div>
       </div>
 
-      {/* Features Grid */}
+      {/* Solutions Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {solutions.map((solution, index) => (
             <motion.div
-              key={feature.title}
+              key={solution.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center mb-6">
-                <feature.icon className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
+                  <solution.icon className="w-6 h-6 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900">{solution.title}</h2>
               </div>
-              <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-              <p className="text-gray-600 mb-6">{feature.description}</p>
-              <ul className="space-y-3">
-                {feature.benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-center text-gray-700">
+              <p className="text-gray-600 mb-6">{solution.description}</p>
+              <div className="grid grid-cols-1 gap-3">
+                {solution.features.map((feature) => (
+                  <div key={feature} className="flex items-center">
                     <svg
-                      className="w-5 h-5 text-red-600 mr-2"
+                      className="w-5 h-5 text-red-600 mr-2 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -97,66 +137,46 @@ export default function HealthcareSolutions() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    {benefit}
-                  </li>
+                    <span className="text-gray-700">{feature}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/demo"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-red-600 to-red-700 hover:shadow-lg transition-all duration-200"
+                >
+                  Learn More
+                </Link>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Image Showcase Section */}
-      <div className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="relative h-[500px] rounded-2xl overflow-hidden"
-          >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
+      {/* Call to Action Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-12 text-center text-white"
+        >
+          <h2 className="text-3xl font-bold mb-6">
+            Ready to Transform Your Healthcare Security?
+          </h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Get in touch with our team to learn how our AI-powered solutions can enhance your security infrastructure and improve operational efficiency.
+          </p>
+          <div className="flex justify-center">
+            <Link
+              href="/demo"
+              className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-lg font-medium rounded-full text-white hover:bg-white hover:text-red-600 transition-all duration-200"
             >
-              <source src="/videos/solution-video.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-black/20"></div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-3xl overflow-hidden">
-            <div className="px-8 py-16 md:p-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="max-w-2xl mx-auto text-center"
-              >
-                <h2 className="text-3xl font-bold text-white mb-6">
-                  Ready to Transform Your Healthcare Security?
-                </h2>
-                <p className="text-white/90 mb-8">
-                  Get in touch with our healthcare solutions experts to discuss your specific needs
-                  and discover how we can help enhance your facility&apos;s security.
-                </p>
-                <Link
-                  href="/demo"
-                  className="inline-block bg-white text-red-600 px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-200"
-                >
-                  Schedule a Demo
-                </Link>
-              </motion.div>
-            </div>
+              Request Demo
+            </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

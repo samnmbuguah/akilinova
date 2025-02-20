@@ -2,77 +2,77 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { 
-  MagnifyingGlassIcon,
   VideoCameraIcon,
-  ChartBarIcon,
   ShieldCheckIcon,
-  BuildingLibraryIcon
+  UserGroupIcon,
+  ChartBarIcon,
+  BanknotesIcon
 } from '@heroicons/react/24/outline';
 
 const solutions = [
   {
-    title: 'Smart Video Search',
-    description: 'Advanced AI-powered video search that allows you to quickly find specific events, people, or objects in surveillance footage. Perfect for investigating incidents and compliance monitoring.',
-    icon: MagnifyingGlassIcon,
-    features: [
-      'Instant search through hours of footage',
-      'Object and person detection',
-      'Activity-based search filters',
-      'Timestamp and location indexing',
-      'Export relevant clips instantly',
-      'Advanced search filters'
-    ]
-  },
-  {
     title: 'ATM Surveillance',
-    description: 'Comprehensive ATM monitoring system with real-time alerts and behavioral analysis to prevent fraud and ensure customer safety.',
+    description: 'Advanced AI-powered surveillance system for ATMs with real-time monitoring and fraud detection.',
     icon: VideoCameraIcon,
     features: [
       'Real-time monitoring',
-      'Suspicious behavior detection',
-      'Card skimmer detection',
-      'Face mask detection',
-      'Instant alert system',
-      'Historical footage analysis'
+      'Fraud detection',
+      'Suspicious behavior alerts',
+      'Emergency response',
+      'Remote surveillance',
+      'Incident reporting'
     ]
   },
   {
-    title: 'Branch Analytics',
-    description: 'Gain valuable insights into branch operations, customer behavior, and security events with our advanced analytics platform.',
-    icon: ChartBarIcon,
-    features: [
-      'Customer flow analysis',
-      'Queue management insights',
-      'Staff efficiency metrics',
-      'Peak hour identification',
-      'Security event tracking',
-      'Custom reporting tools'
-    ]
-  },
-  {
-    title: 'Vault Monitoring',
-    description: 'Enhanced security for high-risk areas with advanced motion detection and behavioral analysis.',
-    icon: BuildingLibraryIcon,
-    features: [
-      'Multi-camera coverage',
-      'Access pattern analysis',
-      'Unauthorized access alerts',
-      'Time-stamped recordings',
-      'Dual control monitoring',
-      'Audit trail generation'
-    ]
-  },
-  {
-    title: 'Fraud Prevention',
-    description: 'AI-powered system to detect and prevent fraudulent activities in real-time across all banking channels.',
+    title: 'Branch Security',
+    description: 'Comprehensive security solutions to protect bank branches, staff, and customers.',
     icon: ShieldCheckIcon,
     features: [
-      'Behavioral analysis',
-      'Pattern recognition',
-      'Real-time alerts',
-      'Identity verification',
+      'Access control',
+      'Visitor management',
+      'Vault monitoring',
+      'Asset protection',
+      'Emergency protocols',
+      'Security compliance'
+    ]
+  },
+  {
+    title: 'Customer Analytics',
+    description: 'Gain insights into customer behavior and branch operations with advanced analytics.',
+    icon: UserGroupIcon,
+    features: [
+      'Traffic analysis',
+      'Queue management',
+      'Service optimization',
+      'Customer patterns',
+      'Peak hour tracking',
+      'Performance metrics'
+    ]
+  },
+  {
+    title: 'Operations Analytics',
+    description: 'Improve operational efficiency with data-driven insights and monitoring.',
+    icon: ChartBarIcon,
+    features: [
+      'Resource utilization',
+      'Staff efficiency',
       'Transaction monitoring',
-      'Compliance reporting'
+      'Equipment tracking',
+      'Capacity planning',
+      'Performance reporting'
+    ]
+  },
+  {
+    title: 'Transaction Security',
+    description: 'Enhanced security measures for financial transactions and sensitive operations.',
+    icon: BanknotesIcon,
+    features: [
+      'Transaction monitoring',
+      'Fraud prevention',
+      'Identity verification',
+      'Secure processing',
+      'Audit trails',
+      'Compliance tracking'
     ]
   }
 ];
@@ -96,8 +96,8 @@ export default function BankingFinanceSolutions() {
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Advanced AI-powered surveillance and analytics solutions designed specifically for banks and financial institutions.
-              Enhance security, improve operations, and ensure compliance.
+              Transform your financial institution with our AI-powered surveillance and analytics solutions.
+              Enhance security, improve customer service, and optimize branch operations.
             </p>
           </motion.div>
         </div>
@@ -114,10 +114,12 @@ export default function BankingFinanceSolutions() {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center mb-6">
-                <solution.icon className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
+                  <solution.icon className="w-6 h-6 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900">{solution.title}</h2>
               </div>
-              <h2 className="text-2xl font-bold mb-4">{solution.title}</h2>
               <p className="text-gray-600 mb-6">{solution.description}</p>
               <div className="grid grid-cols-1 gap-3">
                 {solution.features.map((feature) => (
@@ -141,7 +143,7 @@ export default function BankingFinanceSolutions() {
               </div>
               <div className="mt-8">
                 <Link
-                  href={`/solutions/banking-finance/${solution.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  href="/demo"
                   className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-red-600 to-red-700 hover:shadow-lg transition-all duration-200"
                 >
                   Learn More
