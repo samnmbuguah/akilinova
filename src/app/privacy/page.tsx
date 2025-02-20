@@ -85,6 +85,13 @@ export default function Privacy() {
             <p className="text-sm text-gray-500 mt-8">
               Last updated: February 19, 2024
             </p>
+
+            <section>
+              <h2 className="text-2xl font-semibold mb-4">Cookies</h2>
+              <p className="mb-4">
+                We use {"\""}cookies{"\""} to collect information.
+              </p>
+            </section>
           </div>
         </motion.div>
       </div>
