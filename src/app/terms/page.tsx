@@ -16,9 +16,7 @@ export default function Terms() {
             <section>
               <h2 className="text-2xl font-semibold mb-4">Agreement to Terms</h2>
               <p className="text-gray-600">
-                By accessing or using Akilinova's services, you agree to be bound by these Terms
-                of Service and all applicable laws and regulations. If you do not agree with any
-                of these terms, you are prohibited from using or accessing our services.
+                By accessing and using Akilinova&apos;s website and services, you agree to these terms.
               </p>
             </section>
 
