@@ -61,13 +61,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://akilinova.com",
+    url: "YOUR_WEBSITE_URL",
     siteName: "AkiliNova",
     title: "AkiliNova - AI-Powered Smart Technology Solutions",
-    description: "AkiliNova designs, develops, and deploys AI-Powered smart technology solutions, revolutionizing businesses through AI-driven automation, web solutions, and IoT systems.",
+    description: "Revolutionizing businesses through AI-driven automation, web solutions, and IoT systems.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "URL_TO_IMAGE",
         width: 1200,
         height: 630,
         alt: "AkiliNova - Smart Technology Solutions"
@@ -77,8 +77,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AkiliNova - AI-Powered Smart Technology Solutions",
-    description: "AkiliNova designs, develops, and deploys AI-Powered smart technology solutions, revolutionizing businesses through AI-driven automation.",
-    images: ["/og-image.jpg"]
+    description: "Revolutionizing businesses through AI-driven automation, web solutions, and IoT systems.",
+    images: ["URL_TO_IMAGE"]
   }
 };
 
@@ -95,7 +95,7 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         <GrammarlyCleanup />
         <Navbar />
-        {gaId && <GoogleAnalytics measurementId={gaId} />}
+        {gaId && <GoogleAnalytics />}
         {children}
         <Footer />
       </body>
