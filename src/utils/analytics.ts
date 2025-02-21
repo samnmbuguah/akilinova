@@ -5,13 +5,15 @@ type EventParams = {
   value?: number;
 };
 
-interface Window {
-  gtag: (command: string, action: string, params: Record<string, unknown>) => void;
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params: Record<string, unknown>) => void;
+  }
 }
 
 export const trackEvent = ({ action, category, label, value }: EventParams) => {
-  if (typeof window !== 'undefined' && (window as Window).gtag) {
-    (window as Window).gtag('event', action, {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', action, {
       event_category: category,
       event_label: label,
       value: value,
