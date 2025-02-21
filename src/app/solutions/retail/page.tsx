@@ -118,7 +118,7 @@ export default function RetailSolutions() {
                 <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
                   <solution.icon className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">{solution.title}</h2>
+                <h2 className="text-2xl font-bold">{solution.title}</h2>
               </div>
               <p className="text-gray-600 mb-6">{solution.description}</p>
               <div className="grid grid-cols-1 gap-3">
@@ -156,25 +156,25 @@ export default function RetailSolutions() {
 
       {/* Call to Action Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
           className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-12 text-center text-white"
-        >
+              >
           <h2 className="text-3xl font-bold mb-6">
             Ready to Transform Your Retail Security?
-          </h2>
+                </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Get in touch with our team to learn how our AI-powered solutions can enhance your security infrastructure and improve operational efficiency.
-          </p>
+                </p>
           <div className="flex justify-center">
-            <Link
-              href="/demo"
+                <Link
+                  href="/demo"
               className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-lg font-medium rounded-full text-white hover:bg-white hover:text-red-600 transition-all duration-200"
-            >
+                >
               Request Demo
-            </Link>
+                </Link>
           </div>
         </motion.div>
       </div>

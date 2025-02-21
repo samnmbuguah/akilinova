@@ -118,7 +118,7 @@ export default function RealEstateSolutions() {
                 <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
                   <solution.icon className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">{solution.title}</h2>
+                <h2 className="text-2xl font-bold">{solution.title}</h2>
               </div>
               <p className="text-gray-600 mb-6">{solution.description}</p>
               <div className="grid grid-cols-1 gap-3">
