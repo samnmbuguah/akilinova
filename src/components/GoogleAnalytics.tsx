@@ -1,7 +1,13 @@
 'use client';
 import Script from 'next/script';
 
-const GoogleAnalytics = ({ measurementId }: { measurementId: string }) => {
+const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
+if (!measurementId) {
+  console.error("Google Analytics measurement ID is not defined. Please check your environment variables.");
+}
+
+const GoogleAnalytics = () => {
   return (
     <>
       <Script
@@ -16,7 +22,7 @@ const GoogleAnalytics = ({ measurementId }: { measurementId: string }) => {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${measurementId}');
+            gtag('config', measurementId);
           `,
         }}
       />
