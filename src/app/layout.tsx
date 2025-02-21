@@ -9,8 +9,26 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Akilinova",
-  description: "Empowering businesses with innovative solutions",
+  title: {
+    default: "AkiliNova - AI-Powered Smart Technology Solutions",
+    template: "%s | AkiliNova"
+  },
+  description: "AkiliNova designs, develops, and deploys AI-Powered smart technology solutions, revolutionizing businesses through AI-driven automation, web solutions, and IoT systems. Founded to push the boundaries of innovation, we deliver cutting-edge digital solutions for enterprises looking to scale efficiently.",
+  keywords: [
+    "AI solutions",
+    "smart technology",
+    "IoT systems",
+    "business automation",
+    "web solutions",
+    "digital transformation",
+    "enterprise solutions",
+    "artificial intelligence",
+    "machine learning",
+    "surveillance systems"
+  ],
+  authors: [{ name: "AkiliNova" }],
+  creator: "AkiliNova",
+  publisher: "AkiliNova",
   icons: {
     icon: [
       {
@@ -40,6 +58,28 @@ export const metadata: Metadata = {
       },
     ],
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://akilinova.com",
+    siteName: "AkiliNova",
+    title: "AkiliNova - AI-Powered Smart Technology Solutions",
+    description: "AkiliNova designs, develops, and deploys AI-Powered smart technology solutions, revolutionizing businesses through AI-driven automation, web solutions, and IoT systems.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "AkiliNova - Smart Technology Solutions"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AkiliNova - AI-Powered Smart Technology Solutions",
+    description: "AkiliNova designs, develops, and deploys AI-Powered smart technology solutions, revolutionizing businesses through AI-driven automation.",
+    images: ["/og-image.jpg"]
+  }
 };
 
 export default function RootLayout({
