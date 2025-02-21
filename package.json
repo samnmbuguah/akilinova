@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "build:prod": "npm run build && tar -czf production.tar.gz .next package.json package-lock.json public next.config.ts postcss.config.mjs tailwind.config.ts server.js"
   },
