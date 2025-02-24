@@ -3,40 +3,48 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const solutions = [
-  'AI Surveillance',
-  'Analytics Dashboard',
-  'AI Chatbots',
-  'Custom Integration'
-];
-
 export default function Demo() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
     phone: '',
-    solution: '',
     message: ''
   });
 
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle the form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      solution: '',
-      message: ''
-    });
+    setStatus('submitting');
+
+    try {
+      const response = await fetch('/api/send-demo-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Failed to send request');
+
+      setStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      setStatus('error');
+    }
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -95,7 +103,8 @@ export default function Demo() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Your full name"
                 />
               </div>
 
@@ -104,7 +113,7 @@ export default function Demo() {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Business Email *
+                  Email *
                 </label>
                 <input
                   type="email"
@@ -113,7 +122,8 @@ export default function Demo() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Your email address"
                 />
               </div>
 
@@ -122,7 +132,7 @@ export default function Demo() {
                   htmlFor="company"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Company Name *
+                  Company Name
                 </label>
                 <input
                   type="text"
@@ -130,8 +140,8 @@ export default function Demo() {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Your company name (optional)"
                 />
               </div>
 
@@ -148,32 +158,9 @@ export default function Demo() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Your phone number (optional)"
                 />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="solution"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Solution of Interest *
-                </label>
-                <select
-                  id="solution"
-                  name="solution"
-                  value={formData.solution}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                >
-                  <option value="">Select a solution</option>
-                  {solutions.map((solution) => (
-                    <option key={solution} value={solution}>
-                      {solution}
-                    </option>
-                  ))}
-                </select>
               </div>
 
               <div>
@@ -189,17 +176,32 @@ export default function Demo() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
                   placeholder="Tell us about your specific needs..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-200"
+                disabled={status === 'submitting'}
+                className={`w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl transition-all duration-200 ${
+                  status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg'
+                }`}
               >
-                Request Demo
+                {status === 'submitting' ? 'Sending...' : 'Request Demo'}
               </button>
+
+              {status === 'success' && (
+                <p className="text-green-600 text-center mt-4">
+                  Thank you! We&apos;ll be in touch soon.
+                </p>
+              )}
+
+              {status === 'error' && (
+                <p className="text-red-600 text-center mt-4">
+                  Something went wrong. Please try again later.
+                </p>
+              )}
             </form>
           </motion.div>
 
@@ -215,7 +217,7 @@ export default function Demo() {
               <ul className="space-y-4">
                 <li className="flex items-start space-x-3">
                   <svg
-                    className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-red-600 mt-1 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -236,7 +238,7 @@ export default function Demo() {
                 </li>
                 <li className="flex items-start space-x-3">
                   <svg
-                    className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-red-600 mt-1 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -251,13 +253,13 @@ export default function Demo() {
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg mb-1 text-gray-900">Q&A Session</h3>
                     <p className="text-gray-600">
-                      Get answers to all your questions from our technical team.
+                      Get answers to all your questions from our technical experts.
                     </p>
                   </div>
                 </li>
                 <li className="flex items-start space-x-3">
                   <svg
-                    className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-red-600 mt-1 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -272,7 +274,7 @@ export default function Demo() {
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg mb-1 text-gray-900">Custom Solution</h3>
                     <p className="text-gray-600">
-                      Receive a tailored proposal based on your requirements.
+                      Get a tailored proposal based on your specific requirements.
                     </p>
                   </div>
                 </li>
