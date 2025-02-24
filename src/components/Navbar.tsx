@@ -26,11 +26,13 @@ const Navbar = () => {
       ],
     },
     { name: 'Blog', href: '/blog' },
-    { name: 'Company', href: '/about', dropdown: true, subItems: [
-      { name: 'About Us', href: '/about' },
-      { name: 'Team', href: '/team' },
-      { name: 'Careers', href: '/careers' },
-    ]},
+    {
+      name: 'Company', href: '/about', dropdown: true, subItems: [
+        { name: 'About Us', href: '/about' },
+        { name: 'Team', href: '/team' },
+        { name: 'Careers', href: '/careers' },
+      ]
+    },
   ];
 
   return (
@@ -41,9 +43,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-28">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="relative w-24 h-24">
+            <div className="relative w-[250px] h-[150px]">
               <Image
-                src="/akilinova_logo.jpeg"
+                src="/AkiliNovaLogo.svg"
                 alt="Akilinova Logo"
                 fill
                 className="object-contain"
@@ -53,7 +55,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <div key={item.name} className="relative group">
                 {item.dropdown ? (
@@ -62,9 +64,8 @@ const Navbar = () => {
                     onMouseEnter={() => setActiveDropdown(item.name)}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
-                    <span className={`text-lg font-semibold transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${
-                      pathname.startsWith(item.href) ? 'text-red-600' : ''
-                    }`}>
+                    <span className={`text-lg font-semibold transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${pathname.startsWith(item.href) ? 'text-red-600' : ''
+                      }`}>
                       {item.name}
                     </span>
                     <svg
@@ -98,9 +99,8 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`text-lg font-semibold transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${
-                      pathname === item.href ? 'text-red-600' : ''
-                    }`}
+                    className={`text-lg font-semibold transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${pathname === item.href ? 'text-red-600' : ''
+                      }`}
                   >
                     {item.name}
                   </Link>
@@ -161,11 +161,10 @@ const Navbar = () => {
                       <Link
                         key={subItem.name}
                         href={subItem.href}
-                        className={`block py-2 text-base transition-colors duration-200 ${
-                          pathname === subItem.href
-                            ? 'text-red-600'
-                            : 'text-gray-800 hover:text-red-600'
-                        }`}
+                        className={`block py-2 text-base transition-colors duration-200 ${pathname === subItem.href
+                          ? 'text-red-600'
+                          : 'text-gray-800 hover:text-red-600'
+                          }`}
                         onClick={() => setIsOpen(false)}
                       >
                         {subItem.name}
@@ -176,11 +175,10 @@ const Navbar = () => {
               ) : (
                 <Link
                   href={item.href}
-                  className={`block py-3 text-lg font-semibold transition-colors duration-200 ${
-                    pathname === item.href
-                      ? 'text-red-600'
-                      : 'text-gray-800 hover:text-red-600'
-                  }`}
+                  className={`block py-3 text-lg font-semibold transition-colors duration-200 ${pathname === item.href
+                    ? 'text-red-600'
+                    : 'text-gray-800 hover:text-red-600'
+                    }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
