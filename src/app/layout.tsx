@@ -9,6 +9,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://akilinova.com'),
   title: {
     default: "AkiliNova - AI-Powered Smart Technology Solutions",
     template: "%s | AkiliNova"
@@ -45,6 +46,16 @@ export const metadata: Metadata = {
         sizes: "32x32",
         type: "image/png",
       },
+      {
+        url: "/favicon_io/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/favicon_io/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      }
     ],
     apple: {
       url: "/favicon_io/apple-touch-icon.png",
@@ -87,15 +98,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={inter.className} suppressHydrationWarning>
         <GrammarlyCleanup />
         <Navbar />
-        {gaId && <GoogleAnalytics />}
+        <GoogleAnalytics />
         {children}
         <Footer />
       </body>
