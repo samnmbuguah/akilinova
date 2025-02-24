@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Rondana';
+  src: url('/fonts/Rondana Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.logoText {
+  font-family: 'Rondana', sans-serif;
+} 
