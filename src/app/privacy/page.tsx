@@ -78,7 +78,7 @@ export default function Privacy() {
               <p className="text-gray-600">
                 We may update our Privacy Policy from time to time. We will notify you of any
                 changes by posting the new Privacy Policy on this page and updating the
-                "Last updated" date.
+                &ldquo;Last updated&rdquo; date.
               </p>
             </section>
 
@@ -89,7 +89,7 @@ export default function Privacy() {
             <section>
               <h2 className="text-2xl font-semibold mb-4">Cookies</h2>
               <p className="mb-4">
-                We use {"\""}cookies{"\""} to collect information.
+                We use &ldquo;cookies&rdquo; to collect information.
               </p>
             </section>
           </div>
