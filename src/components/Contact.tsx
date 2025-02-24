@@ -10,17 +10,34 @@ const Contact = () => {
     message: '',
   });
 
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle the form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      message: '',
-    });
+    setStatus('submitting');
+
+    try {
+      const response = await fetch('/api/send-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      setStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      setStatus('error');
+    }
   };
 
   const handleChange = (
@@ -116,7 +133,7 @@ const Contact = () => {
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Full Name
+                  Full Name *
                 </label>
                 <input
                   type="text"
@@ -125,7 +142,8 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Your full name"
                 />
               </div>
               <div>
@@ -133,7 +151,7 @@ const Contact = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Email Address
+                  Email *
                 </label>
                 <input
                   type="email"
@@ -142,7 +160,8 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Your email address"
                 />
               </div>
               <div>
@@ -158,7 +177,8 @@ const Contact = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Your company name (optional)"
                 />
               </div>
               <div>
@@ -166,7 +186,7 @@ const Contact = () => {
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Message
+                  Message *
                 </label>
                 <textarea
                   id="message"
@@ -175,15 +195,31 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  placeholder="Type your message here..."
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-200"
+                disabled={status === 'submitting'}
+                className={`w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl transition-all duration-200 ${
+                  status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg'
+                }`}
               >
-                Send Message
+                {status === 'submitting' ? 'Sending...' : 'Send Message'}
               </button>
+
+              {status === 'success' && (
+                <p className="text-green-600 text-center mt-4">
+                  Thank you! Your message has been sent.
+                </p>
+              )}
+
+              {status === 'error' && (
+                <p className="text-red-600 text-center mt-4">
+                  Something went wrong. Please try again later.
+                </p>
+              )}
             </form>
           </motion.div>
         </div>
