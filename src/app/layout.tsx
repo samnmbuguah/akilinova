@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GrammarlyCleanup from "@/components/GrammarlyCleanup";
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import PageTransition from "@/components/PageTransition";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -105,7 +106,9 @@ export default function RootLayout({
         <GrammarlyCleanup />
         <Navbar />
         <GoogleAnalytics />
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
         <Footer />
       </body>
     </html>
