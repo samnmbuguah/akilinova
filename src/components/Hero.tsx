@@ -1,6 +1,5 @@
 'use client';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 const Hero = () => {
   return (
@@ -41,20 +40,6 @@ const Hero = () => {
               Detect threats instantly. Respond immediately. Protect continuously.
               Transform your security with cutting-edge AI technology.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/demo"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-red-600 to-red-700 rounded-full hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
-              >
-                Start Free Trial
-              </Link>
-              <Link
-                href="/demo"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white border-2 border-white/20 rounded-full hover:bg-white/10 transform hover:-translate-y-1 transition-all duration-200"
-              >
-                Request Demo
-              </Link>
-            </div>
             
             {/* Trust Indicators */}
             <div className="pt-12">
