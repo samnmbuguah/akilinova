@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,20 +6,31 @@ export const metadata: Metadata = {
   description: 'Meet the talented team behind Akilinova - leaders in AI-powered surveillance solutions.',
 };
 
+const getInitials = (name: string) => {
+  return name
+    .split(' ')
+    .map(word => word[0])
+    .join('')
+    .toUpperCase();
+};
+
 const teamMembers = [
   {
-    name: 'John Doe',
-    role: 'CEO & Co-founder',
-    image: '/team/placeholder-1.jpg',
-    bio: 'Former AI Research Lead at Tech Giant with 15+ years of experience in computer vision and AI.',
+    name: 'Derrick Ngari',
+    role: 'Founder & Business Development',
   },
   {
-    name: 'Jane Smith',
-    role: 'CTO & Co-founder',
-    image: '/team/placeholder-2.jpg',
-    bio: 'PhD in Computer Science, specialized in machine learning and real-time video processing.',
+    name: 'Emmanuel Barasa',
+    role: 'Founder & Software Development',
   },
-  // Add more team members as needed
+  {
+    name: 'Samuel Mbugua',
+    role: 'Software Engineer',
+  },
+  {
+    name: 'Brian Cheruiyot',
+    role: 'Software Engineer',
+  },
 ];
 
 export default function TeamPage() {
@@ -34,26 +44,20 @@ export default function TeamPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {teamMembers.map((member) => (
             <div
               key={member.name}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="relative h-64 w-full bg-gray-100">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority
-                />
+              <div className="relative h-64 w-full bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center">
+                <span className="text-5xl font-bold text-white">
+                  {getInitials(member.name)}
+                </span>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
                 <p className="text-red-600 font-medium mb-3">{member.role}</p>
-                <p className="text-gray-600">{member.bio}</p>
               </div>
             </div>
           ))}
