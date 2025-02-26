@@ -10,7 +10,7 @@ export default function Privacy() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
+          <h1 className="text-4xl font-bold mb-8 text-gray-900">Privacy Policy</h1>
           
           <div className="bg-white rounded-2xl p-8 shadow-lg space-y-6">
             <section>

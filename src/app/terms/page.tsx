@@ -10,7 +10,7 @@ export default function Terms() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
+          <h1 className="text-4xl font-bold mb-8 text-gray-900">Terms of Service</h1>
           
           <div className="bg-white rounded-2xl p-8 shadow-lg space-y-6">
             <section>
