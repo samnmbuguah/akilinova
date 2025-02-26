@@ -28,9 +28,9 @@ const Navbar = () => {
       ],
     },
     {
-      name: 'Company', 
-      href: '/about', 
-      dropdown: true, 
+      name: 'Company',
+      href: '/about',
+      dropdown: true,
       subItems: [
         { name: 'About Us', href: '/about' },
         { name: 'Team', href: '/team' },
@@ -54,7 +54,7 @@ const Navbar = () => {
             variants={slideIn}
             initial="initial"
             animate="animate"
-            className="w-[250px] flex-shrink-0"
+            className="w-[250px] flex-shrink-0 flex justify-start"
           >
             <Link href="/" className="flex items-center">
               <div className="relative w-[250px] h-[150px]">
@@ -200,28 +200,48 @@ const Navbar = () => {
                   >
                     {item.dropdown ? (
                       <div className="space-y-4">
-                        <div className={`text-lg text-gray-900 ${styles.menuText}`}>
+                        <button
+                          onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                          className={`text-lg text-gray-900 ${styles.menuText} w-full text-left flex items-center justify-between`}
+                        >
                           {item.name}
-                        </div>
-                        <div className="pl-4 space-y-4">
-                          {item.subItems?.map((subItem) => (
-                            <motion.div
-                              key={subItem.name}
-                              variants={slideIn}
-                            >
-                              <Link
-                                href={subItem.href}
-                                className={`block py-2 text-base transition-colors duration-200 ${styles.menuText} ${pathname === subItem.href
-                                  ? 'text-red-600'
-                                  : 'text-gray-800 hover:text-red-600'
-                                  }`}
-                                onClick={() => setIsOpen(false)}
+                          <motion.svg
+                            animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="w-4 h-4 ml-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </motion.svg>
+                        </button>
+                        {activeDropdown === item.name && (
+                          <div className="pl-4 space-y-4">
+                            {item.subItems?.map((subItem) => (
+                              <motion.div
+                                key={subItem.name}
+                                variants={slideIn}
                               >
-                                {subItem.name}
-                              </Link>
-                            </motion.div>
-                          ))}
-                        </div>
+                                <Link
+                                  href={subItem.href}
+                                  className={`block py-2 text-base transition-colors duration-200 ${styles.menuText} ${pathname === subItem.href
+                                    ? 'text-red-600'
+                                    : 'text-gray-800 hover:text-red-600'
+                                    }`}
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {subItem.name}
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <Link
