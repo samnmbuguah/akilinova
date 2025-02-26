@@ -91,7 +91,7 @@ const Navbar = () => {
                       onMouseEnter={() => setActiveDropdown(item.name)}
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
-                      <span className={`text-lg transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${styles.menuText} ${pathname.startsWith(item.href) ? 'text-red-600' : ''
+                      <span className={`text-xl transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${styles.menuText} ${pathname.startsWith(item.href) ? 'text-red-600' : ''
                         }`}>
                         {item.name}
                       </span>
@@ -142,7 +142,7 @@ const Navbar = () => {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`text-lg transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${styles.menuText} ${pathname === item.href ? 'text-red-600' : ''
+                      className={`text-xl transition-colors duration-200 py-2 text-gray-800 hover:text-red-600 ${styles.menuText} ${pathname === item.href ? 'text-red-600' : ''
                         }`}
                     >
                       {item.name}
