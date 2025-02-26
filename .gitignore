@@ -44,3 +44,4 @@ package-lock.json
 # Ignore all tar and zip files
 *.tar.gz
 *.zip
+/production
