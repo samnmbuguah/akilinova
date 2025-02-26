@@ -11,10 +11,12 @@ const Contact = () => {
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage('');
 
     try {
       const response = await fetch('/api/send-contact', {
@@ -25,7 +27,11 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error('Failed to send message');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
 
       setStatus('success');
       setFormData({
@@ -35,8 +41,13 @@ const Contact = () => {
         message: '',
       });
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Contact Form Error:', error);
       setStatus('error');
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'Failed to send message. Please try again later.'
+      );
     }
   };
 
@@ -51,7 +62,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-100">
+    <section className="py-20 bg-gray-100" id="contact">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
@@ -69,8 +80,8 @@ const Contact = () => {
               transform your security infrastructure.
             </p>
             <div className="space-y-4">
-              <a 
-                href="mailto:info@akilinova.com" 
+              <a
+                href="mailto:info@akilinova.com"
                 className="flex items-center space-x-4 hover:bg-gray-100 p-3 rounded-xl transition-colors duration-200"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
@@ -93,8 +104,8 @@ const Contact = () => {
                   <p className="text-gray-600">info@akilinova.com</p>
                 </div>
               </a>
-              <a 
-                href="tel:+254705094881" 
+              <a
+                href="tel:+254705094881"
                 className="flex items-center space-x-4 hover:bg-gray-100 p-3 rounded-xl transition-colors duration-200"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
@@ -142,7 +153,8 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  disabled={status === 'submitting'}
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900 disabled:opacity-50"
                   placeholder="Your full name"
                 />
               </div>
@@ -160,7 +172,8 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  disabled={status === 'submitting'}
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900 disabled:opacity-50"
                   placeholder="Your email address"
                 />
               </div>
@@ -177,7 +190,8 @@ const Contact = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  disabled={status === 'submitting'}
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900 disabled:opacity-50"
                   placeholder="Your company name (optional)"
                 />
               </div>
@@ -194,31 +208,54 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  disabled={status === 'submitting'}
                   rows={4}
-                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 text-gray-900 disabled:opacity-50"
                   placeholder="Type your message here..."
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className={`w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl transition-all duration-200 ${
-                  status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg'
-                }`}
+                className={`w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-6 rounded-xl transition-all duration-200 ${status === 'submitting' ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg'
+                  }`}
               >
-                {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                {status === 'submitting' ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </div>
+                ) : 'Send Message'}
               </button>
 
               {status === 'success' && (
-                <p className="text-green-600 text-center mt-4">
-                  Thank you! Your message has been sent.
-                </p>
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-green-600 text-center mt-4 p-3 bg-green-50 rounded-lg"
+                >
+                  Thank you! Your message has been sent successfully.
+                </motion.p>
               )}
 
               {status === 'error' && (
-                <p className="text-red-600 text-center mt-4">
-                  Something went wrong. Please try again later.
-                </p>
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-600 text-center mt-4 p-3 bg-red-50 rounded-lg"
+                >
+                  {errorMessage}
+                  <br />
+                  <span className="text-sm mt-1 block">
+                    Please try emailing us directly at{' '}
+                    <a href="mailto:info@akilinova.com" className="underline hover:text-red-700">
+                      info@akilinova.com
+                    </a>
+                  </span>
+                </motion.p>
               )}
             </form>
           </motion.div>
